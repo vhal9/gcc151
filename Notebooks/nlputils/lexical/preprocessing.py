@@ -12,8 +12,7 @@ class Preprocessing:
         return unidecode.unidecode(text)
 
     def remove_punctuation(self, text):
-        text.translate(str.maketrans(text, string.punctuation()))
-        return text
+        return text.translate(str.maketrans('','',string.punctuation))
 
     def tokenize_sentences(self, text):
         sentences = self.sent_tokenizer.tokenize(text)
@@ -26,8 +25,11 @@ class Preprocessing:
     def lemmatize(self, text):
         return text
 
-    def stemmize(self, text):
-        return text
+    def stemmize(self, tokens):
+        return [self.stemmer.stem(word) for word in tokens]
+
+    def lowercase(self, text):
+        return text.lower()
 
     def normalization_pipeline(self, text, remove_accents=True, remove_punctuation=True, tokenize_sentences=True, tokenize_words=True, lemmatize=False, stemmize=False):
 
